@@ -11,11 +11,10 @@ const checkPairsWithSum = (arr, sum) => {
   // return result
 
   for (let i = 0; i < arr.length; i++) {
-    if (arr.filter((x) => arr[i] !== x).includes(sum - arr[i])) {
+    if (arr.slice(i).includes(sum - arr[i])) {
       return true;
     }
   }
-
   return false;
 };
 
@@ -80,5 +79,45 @@ const hanoi = (disc, src, aux, dst) => {
     hanoi(disc - 1, src, dst, aux);
     console.log("Move disc " + disc + " from " + src + " to " + dst);
     hanoi(disc - 1, aux, src, dst);
+  }
+};
+
+/*
+  Understanding Recursion 
+*/
+
+//check what make recursive not working well
+const recursiveArrSum = (arr, initSum = 0) => {
+  let sum = initSum;
+
+  console.log("init", arr, arr[0], sum);
+  if (arr.length > 0) {
+    console.log("if", arr, arr[0], sum);
+
+    sum += arr[0];
+    console.log("if", arr, arr[0], sum);
+
+    recursiveArrSum(arr.slice(1), sum);
+  }
+
+  console.log("end", arr, arr[0], sum);
+
+  return sum;
+};
+
+const recursiveSumArr = (arr, initSum = 0) => {
+  let sum = initSum;
+
+  if (arr.length > 0) {
+    sum += arr[0];
+    console.log(sum);
+    recursiveSumArr(arr.slice(1), sum);
+  }
+};
+
+const recursiveMultiplication = (num, limit = 0) => {
+  if (limit <= 10) {
+    console.log(`${num} * ${limit} = ${num * limit}`);
+    recursiveMultiplication(num, limit + 1);
   }
 };
